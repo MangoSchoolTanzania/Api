@@ -26,11 +26,25 @@ namespace MangoSchoolApi.Data.Mappings
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(200);
 
-            builder.Property(x => x.Period)
+            builder.Property(x => x.Year)
                 .IsRequired()
-                .HasColumnName("Period")
-                .HasColumnType("DateTime");
+                .HasColumnName("Year")
+                .HasColumnType("int");
 
+            builder.Property(x => x.Semester)
+                .IsRequired()
+                .HasColumnName("Semester")
+                .HasColumnType("int");
+
+            builder.HasMany(c => c.Students)   // Class has many students
+                  .WithMany(s => s.Classes)   // Student is in many classes
+                  .UsingEntity(j => j.ToTable("ClassStudent")); // Intermediate table
+
+            // Configure the relationships
+            builder.HasMany(c => c.Results)
+                .WithOne(r => r.Class)
+                .HasForeignKey(r => r.ClassId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

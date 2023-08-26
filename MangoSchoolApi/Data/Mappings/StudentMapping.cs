@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MangoSchoolApi.Data.Mappings
 {
-    public class StudantMapping : IEntityTypeConfiguration<Studant>
+    public class StudentMapping : IEntityTypeConfiguration<Student>
     {
-        public void Configure(EntityTypeBuilder<Studant> builder)
+        public void Configure(EntityTypeBuilder<Student> builder)
         {
             // Tabela
-            builder.ToTable("Studant");
+            builder.ToTable("Student");
 
             // Chave Primária
             builder.HasKey(x => x.Id);
@@ -22,20 +22,30 @@ namespace MangoSchoolApi.Data.Mappings
             // Propriedades
             builder.Property(x => x.Name)
                 .IsRequired()
-                .HasColumnName("UserName")
+                .HasColumnName("Name")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(200);
 
             builder.Property(x => x.LastName)
                 .IsRequired()
-                .HasColumnName("UserName")
+                .HasColumnName("LastName")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(200);
 
             builder.Property(x => x.Age)
                 .IsRequired()
-                .HasColumnName("UserName")
+                .HasColumnName("Age")
                 .HasColumnType("INT");
+
+            builder.HasMany(s => s.Classes)    // Student has many classes
+                   .WithMany(c => c.Students)  // Class has many students
+                   .UsingEntity(j => j.ToTable("ClassStudent")); // Intermediate table
+
+            // Configure the relationships
+            builder.HasMany(s => s.Results)
+                .WithOne(r => r.Student)
+                .HasForeignKey(r => r.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

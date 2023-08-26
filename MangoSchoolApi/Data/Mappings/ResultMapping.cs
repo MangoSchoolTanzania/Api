@@ -24,6 +24,17 @@ namespace MangoSchoolApi.Data.Mappings
                 .IsRequired()
                 .HasColumnName("Result")
                 .HasColumnType("FLOAT");
+
+            // Configure the relationships
+            builder.HasOne(r => r.Student)
+                .WithMany(s => s.Results)
+                .HasForeignKey(r => r.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(r => r.Class)
+                .WithMany(c => c.Results)
+                .HasForeignKey(r => r.ClassId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

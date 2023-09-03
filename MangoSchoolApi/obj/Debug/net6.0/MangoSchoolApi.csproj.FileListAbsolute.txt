@@ -85,3 +85,4 @@ C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\obj\Debug\net6.0\r
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\obj\Debug\net6.0\MangoSchoolApi.pdb
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\obj\Debug\net6.0\MangoSchoolApi.genruntimeconfig.cache
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\obj\Debug\net6.0\ref\MangoSchoolApi.dll
+C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

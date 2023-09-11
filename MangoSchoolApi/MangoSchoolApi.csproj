@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="ModelView\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
 
 </Project>

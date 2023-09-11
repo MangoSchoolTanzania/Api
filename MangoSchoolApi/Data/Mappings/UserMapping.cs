@@ -42,6 +42,11 @@ namespace MangoSchoolApi.Data.Mappings
                 .IsRequired()
                 .HasColumnName("IsAdmin")
                 .HasColumnType("SMALLINT");
+
+            builder.Property(x => x.isActive)
+                .IsRequired()
+                .HasColumnName("IsActive")
+                .HasColumnType("SMALLINT");
         }
     }
 }

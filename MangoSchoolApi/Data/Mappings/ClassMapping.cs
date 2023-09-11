@@ -31,20 +31,60 @@ namespace MangoSchoolApi.Data.Mappings
                 .HasColumnName("Year")
                 .HasColumnType("int");
 
-            builder.Property(x => x.Semester)
+            builder.Property(x => x.Month)
                 .IsRequired()
-                .HasColumnName("Semester")
+                .HasColumnName("Month")
                 .HasColumnType("int");
 
-            builder.HasMany(c => c.Students)   // Class has many students
-                  .WithMany(s => s.Classes)   // Student is in many classes
-                  .UsingEntity(j => j.ToTable("ClassStudent")); // Intermediate table
+            builder.Property(x => x.Arith)
+                .IsRequired()
+                .HasColumnName("Arith")
+                .HasColumnType("int");
 
-            // Configure the relationships
-            builder.HasMany(c => c.Results)
-                .WithOne(r => r.Class)
-                .HasForeignKey(r => r.ClassId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.Property(x => x.Kus)
+                .IsRequired()
+                .HasColumnName("Kus")
+                .HasColumnType("int");
+
+            builder.Property(x => x.HE)
+                .IsRequired()
+                .HasColumnName("HE")
+                .HasColumnType("int");
+
+            builder.Property(x => x.SA)
+                .IsRequired()
+                .HasColumnName("SA")
+                .HasColumnType("int");
+
+            builder.Property(x => x.Writ)
+                .IsRequired()
+                .HasColumnName("Writ")
+                .HasColumnType("int");
+
+            builder.Property(x => x.Read)
+                .IsRequired()
+                .HasColumnName("Read")
+                .HasColumnType("int");
+
+            builder.Property(x => x.Total)
+                .IsRequired()
+                .HasColumnName("Total")
+                .HasColumnType("int");
+
+            builder.Property(x => x.Ave)
+                .IsRequired()
+                .HasColumnName("Ave")
+                .HasColumnType("int");
+
+            builder.Property(x => x.Pos)
+                .IsRequired()
+                .HasColumnName("Pos")
+                .HasColumnType("int");
+
+            builder.Property(x => x.IsActive)
+                .IsRequired()
+                .HasColumnName("IsActive")
+                .HasColumnType("smallint");
         }
     }
 }

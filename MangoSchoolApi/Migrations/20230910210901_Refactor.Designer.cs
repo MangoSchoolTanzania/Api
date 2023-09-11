@@ -3,6 +3,7 @@ using MangoSchoolApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangoSchoolApi.Migrations
 {
     [DbContext(typeof(MangoDataContext))]
-    partial class MangoDataContextModelSnapshot : ModelSnapshot
+    [Migration("20230910210901_Refactor")]
+    partial class Refactor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +54,7 @@ namespace MangoSchoolApi.Migrations
 
                     b.Property<int>("Month")
                         .HasColumnType("int")
-                        .HasColumnName("Month");
+                        .HasColumnName("Semester");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -113,10 +116,6 @@ namespace MangoSchoolApi.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("NVARCHAR")
                         .HasColumnName("UserName");
-
-                    b.Property<short>("isActive")
-                        .HasColumnType("SMALLINT")
-                        .HasColumnName("IsActive");
 
                     b.Property<short>("isAdmin")
                         .HasColumnType("SMALLINT")

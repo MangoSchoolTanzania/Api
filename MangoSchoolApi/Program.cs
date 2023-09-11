@@ -31,6 +31,17 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost4200",
+        builder => builder
+            .WithOrigins("http://localhost:4200") // Adjust to your Angular app's URL
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+    );
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,6 +50,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowLocalhost4200");
 
 app.UseHttpsRedirection();
 

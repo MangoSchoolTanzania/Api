@@ -21,7 +21,9 @@ namespace MangoSchoolApi.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Result> Results { get; set; }
         public DbSet<Class> Classes { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlServer(_Prod);
@@ -29,7 +31,9 @@ namespace MangoSchoolApi.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserMapping());
+            modelBuilder.ApplyConfiguration(new ResultMapping());
             modelBuilder.ApplyConfiguration(new ClassMapping());
+
         }
     }
 }

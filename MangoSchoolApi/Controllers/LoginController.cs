@@ -20,7 +20,7 @@ namespace MangoSchoolApi.Controllers
         }
 
         [HttpPost]
-        [Route("/v1/login")]
+        [Route("/v1/Login")]
         public async Task<IActionResult> Login([FromServices] MangoDataContext context, [FromBody]LoginViewModel credentials)
         {
             try

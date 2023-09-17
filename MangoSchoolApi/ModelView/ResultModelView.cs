@@ -1,9 +1,13 @@
-﻿namespace MangoSchoolApi.Models
+﻿namespace MangoSchoolApi.ModelView
 {
-    public class Result 
+    public class ResultModelView
     {
         public int Id { get; set; }
         public bool IsActive { get; set; }
+        public string ClassName { get; set; }
+        public int ClassYear { get; set; }
+        public int ClassMonth { get; set; }
+
         public string Name { get; set; }
         public int Arith { get; set; }
         public int Kus { get; set; }
@@ -14,7 +18,5 @@
         public int Total { get; set; }
         public int Ave { get; set; }
         public int Pos { get; set; }
-        public int ClassId { get; set; }
-        public Class Class { get; set; }
     }
 }

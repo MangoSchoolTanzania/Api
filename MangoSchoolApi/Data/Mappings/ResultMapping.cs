@@ -22,7 +22,7 @@ namespace MangoSchoolApi.Data.Mappings
             // Propriedades
             builder.Property(x => x.Name)
                 .IsRequired()
-                .HasColumnName("UserName")
+                .HasColumnName("Name")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(200);
 

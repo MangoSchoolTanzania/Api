@@ -1,5 +1,6 @@
 ﻿using MangoSchoolApi.Data;
 using MangoSchoolApi.Models;
+using MangoSchoolApi.ModelView;
 using MangoSchoolApi.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MangoSchoolApi.Controllers
 {
     [ApiController]
-    [Route("v1/Class/")]
+    [Route("v1/Result/")]
     public class ResultController : ControllerBase
     {
         private readonly MangoDataContext _MangoDataContext;
@@ -18,18 +19,138 @@ namespace MangoSchoolApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("Paginated/{page}")]
-        public async Task<IActionResult> GetClasses(int page)
+        [HttpGet("Pag/{page}/filterParam/{filterSelectedPage}/stringParam/{stringParam}")]
+        public async Task<IActionResult> GetResults(int page, string filterSelectedPage, string? stringParam)
         {
             try
             {
-                var classes = await _MangoDataContext.Results
+                if (filterSelectedPage == "All")
+                {
+                     var results = await _MangoDataContext.Results
+                    .Include(x => x.Class)
                     .Where(x => x.IsActive == true)
-                    .Skip(page * 10)
-                    .Take(10)
+                    .OrderBy(x => x.Class.Year)
+                    .ThenBy(x => x.Class.Name)
+                    .Skip(page * 25)
+                    .Take(25)
+                    .Select(x => new ResultModelView()
+                    {
+                        Id = x.Id,
+                        ClassName = x.Class.Name,
+                        ClassYear = x.Class.Year,
+                        ClassMonth = x.Class.Month,
+                        Name = x.Name,
+                        Arith = x.Arith,
+                        Ave = x.Ave,
+                        HE = x.HE,
+                        Kus = x.Kus,
+                        IsActive = x.IsActive,
+                        Pos = x.Pos,
+                        Read = x.Read,
+                        SA = x.SA,
+                        Writ = x.Writ,
+                        Total = x.Total,
+                    })
                     .ToListAsync();
 
-                return Ok(classes);
+                    return Ok(results);
+                }
+
+                if(filterSelectedPage == "Class")
+                {
+                    var results = await _MangoDataContext.Results
+                    .Include(x => x.Class)
+                    .Where(x => x.IsActive == true && x.Class.Name.Contains(stringParam))
+                    .OrderBy(x => x.Class.Year)
+                    .ThenBy(x => x.Class.Name)
+                    .Skip(page * 25)
+                    .Take(25)
+                    .Select(x => new ResultModelView()
+                    {
+                        Id = x.Id,
+                        ClassName = x.Class.Name,
+                        ClassYear = x.Class.Year,
+                        Name = x.Name,
+                        Arith = x.Arith,
+                        Ave = x.Ave,
+                        HE = x.HE,
+                        Kus = x.Kus,
+                        IsActive = x.IsActive,
+                        Pos = x.Pos,
+                        Read = x.Read,
+                        SA = x.SA,
+                        Writ = x.Writ,
+                        Total = x.Total,
+                    })
+                    .ToListAsync();
+
+                    return Ok(results);
+                }
+
+                if (filterSelectedPage == "Year")
+                {
+                    var results = await _MangoDataContext.Results
+                    .Include(x => x.Class)
+                    .Where(x => x.IsActive == true && x.Class.Year == int.Parse(stringParam))
+                    .OrderBy(x => x.Class.Year)
+                    .ThenBy(x => x.Class.Name)
+                    .Skip(page * 25)
+                    .Take(25)
+                    .Select(x => new ResultModelView()
+                    {
+                        Id = x.Id,
+                        ClassName = x.Class.Name,
+                        ClassYear = x.Class.Year,
+                        Name = x.Name,
+                        Arith = x.Arith,
+                        Ave = x.Ave,
+                        HE = x.HE,
+                        Kus = x.Kus,
+                        IsActive = x.IsActive,
+                        Pos = x.Pos,
+                        Read = x.Read,
+                        SA = x.SA,
+                        Writ = x.Writ,
+                        Total = x.Total,
+                    })
+                    .ToListAsync();
+
+                    return Ok(results);
+                }
+
+                if (filterSelectedPage == "Student")
+                {
+                    var results = await _MangoDataContext.Results
+                    .Include(x => x.Class)
+                    .Where(x => x.IsActive == true && x.Name == stringParam)
+                    .OrderBy(x => x.Class.Year)
+                    .ThenBy(x => x.Class.Name)
+                    .Skip(page * 25)
+                    .Take(25)
+                    .Select(x => new ResultModelView()
+                    {
+                        Id = x.Id,
+                        ClassName = x.Class.Name,
+                        ClassYear = x.Class.Year,
+                        Name = x.Name,
+                        Arith = x.Arith,
+                        Ave = x.Ave,
+                        HE = x.HE,
+                        Kus = x.Kus,
+                        IsActive = x.IsActive,
+                        Pos = x.Pos,
+                        Read = x.Read,
+                        SA = x.SA,
+                        Writ = x.Writ,
+                        Total = x.Total,
+                    })
+                    .ToListAsync();
+
+                    return Ok(results);
+                }
+
+
+                return NotFound();
             }
             catch (Exception)
             {
@@ -40,16 +161,16 @@ namespace MangoSchoolApi.Controllers
 
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetClass(int id)
+        public async Task<IActionResult> GetResult(int id)
         {
             try
             {
                 var clasS = await _MangoDataContext.Results
                     .Where(x => x.IsActive == true)
                     .FirstOrDefaultAsync(c => c.Id == id);
-                
-                if(clasS == null) return NotFound();
-                
+
+                if (clasS == null) return NotFound();
+
                 return Ok(clasS);
             }
             catch (Exception)
@@ -61,7 +182,7 @@ namespace MangoSchoolApi.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> PostClass([FromBody]ResultViewModel ResultViewModel)
+        public async Task<IActionResult> PostResult([FromBody] ResultViewModel ResultViewModel)
         {
             try
             {
@@ -96,13 +217,13 @@ namespace MangoSchoolApi.Controllers
 
         [Authorize]
         [HttpPut]
-        public async Task<IActionResult> PutClass([FromBody] ResultViewModel ResultViewModel)
+        public async Task<IActionResult> PutResult([FromBody] ResultViewModel ResultViewModel)
         {
             try
             {
                 var ClassFromDataBase = _MangoDataContext.Results.FirstOrDefault(c => c.Id == ResultViewModel.Id);
                 if (ClassFromDataBase == null) return NotFound();
-                
+
                 ClassFromDataBase.Arith = ResultViewModel.Arith;
                 ClassFromDataBase.Writ = ResultViewModel.Writ;
                 ClassFromDataBase.HE = ResultViewModel.HE;
@@ -128,7 +249,7 @@ namespace MangoSchoolApi.Controllers
 
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClass(int id)
+        public async Task<IActionResult> DeleteResult(int id)
         {
             try
             {

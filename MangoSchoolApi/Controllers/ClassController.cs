@@ -16,7 +16,7 @@ namespace MangoSchoolApi.Controllers
             _MangoDataContext = MangoDataContext;
         }
 
-        [Authorize,HttpGet("GetMany/{page}")]
+        [Authorize,HttpGet("Pag/{page}")]
         public async Task<IActionResult> GetClasses(int page)
         {
             try
@@ -26,6 +26,8 @@ namespace MangoSchoolApi.Controllers
                     .Take(10)
                     .Where(x => x.IsActive)
                     .ToListAsync();
+
+
 
                 return Ok(classes);
             }

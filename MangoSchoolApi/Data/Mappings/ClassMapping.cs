@@ -9,7 +9,7 @@ namespace MangoSchoolApi.Data.Mappings
         public void Configure(EntityTypeBuilder<Class> builder)
         {
             // Tabela
-            builder.ToTable("Result");
+            builder.ToTable("Class");
 
             // Chave Primária
             builder.HasKey(x => x.Id);
@@ -21,7 +21,7 @@ namespace MangoSchoolApi.Data.Mappings
 
             builder.Property(x => x.Name)
                 .IsRequired()
-                .HasColumnName("UserName")
+                .HasColumnName("Name")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(200);
 

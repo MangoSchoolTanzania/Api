@@ -31,8 +31,8 @@ namespace MangoSchoolApi.Controllers
                     .Where(x => x.IsActive == true)
                     .OrderBy(x => x.Class.Year)
                     .ThenBy(x => x.Class.Name)
-                    .Skip(page * 25)
-                    .Take(25)
+                    .Skip(page * 15)
+                    .Take(15)
                     .Select(x => new ResultModelView()
                     {
                         Id = x.Id,

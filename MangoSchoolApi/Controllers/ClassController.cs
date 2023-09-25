@@ -1,4 +1,6 @@
 ﻿using MangoSchoolApi.Data;
+using MangoSchoolApi.Models;
+using MangoSchoolApi.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +18,7 @@ namespace MangoSchoolApi.Controllers
             _MangoDataContext = MangoDataContext;
         }
 
-        [Authorize,HttpGet("Pag/{page}")]
+        [Authorize, HttpGet("Pag/{page}")]
         public async Task<IActionResult> GetClasses(int page)
         {
             try
@@ -47,6 +49,31 @@ namespace MangoSchoolApi.Controllers
                     .FirstOrDefaultAsync(x => x.Id == id);
 
                 if (clasS == null) return NotFound();
+
+                return Ok(clasS);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [Authorize, HttpPost]
+        public async Task<IActionResult> PostClass([FromBody] ClassViewModel ClassViewModel)
+        {
+            try
+            {
+                var clasS = new Class()
+                {
+                    IsActive = true,
+                    Month = ClassViewModel.Month,
+                    Name = ClassViewModel.Name,
+                    Year = ClassViewModel.Year,
+                };
+
+                _MangoDataContext.Classes.Add(clasS);
+                _MangoDataContext.SaveChanges();
 
                 return Ok(clasS);
             }

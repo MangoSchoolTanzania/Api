@@ -159,6 +159,47 @@ namespace MangoSchoolApi.Controllers
             }
         }
 
+        [Authorize,HttpGet("ByClass/{classId}")]
+        public async Task<IActionResult> GetResultsByClass(int classId)
+        {
+            try
+            {
+                var results = await _MangoDataContext.Results
+                    .Where(x => x.ClassId == classId)
+                    .Include(x => x.Class)
+                    .OrderBy(x => x.Class.Year)
+                    .ThenBy(x => x.Class.Name)
+                    .Select(x => new ResultModelView()
+                    {
+                        Id = x.Id,
+                        ClassName = x.Class.Name,
+                        ClassYear = x.Class.Year,
+                        ClassMonth = x.Class.Month,
+                        Name = x.Name,
+                        Arith = x.Arith,
+                        Ave = x.Ave,
+                        HE = x.HE,
+                        Kus = x.Kus,
+                        IsActive = x.IsActive,
+                        Pos = x.Pos,
+                        Read = x.Read,
+                        SA = x.SA,
+                        Writ = x.Writ,
+                        Total = x.Total,
+                    })
+                    .ToListAsync();
+
+                if (results.Count == 0) return NotFound();
+
+                return Ok(results);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetResult(int id)

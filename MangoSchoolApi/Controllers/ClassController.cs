@@ -26,6 +26,7 @@ namespace MangoSchoolApi.Controllers
                 var classes = await _MangoDataContext.Classes
                     .Skip(10 * page)
                     .Take(10)
+                    .OrderByDescending(x => x.Year)
                     .Where(x => x.IsActive)
                     .ToListAsync();
 
@@ -76,6 +77,50 @@ namespace MangoSchoolApi.Controllers
                 _MangoDataContext.SaveChanges();
 
                 return Ok(clasS);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [Authorize, HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteClass(int id)
+        {
+            try
+            {
+                var clasS = await _MangoDataContext.Classes.FirstOrDefaultAsync(c => c.Id == id);
+                if (clasS == null) return NotFound();
+
+                _MangoDataContext.Remove(clasS);
+                _MangoDataContext.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [Authorize,HttpPut()]
+        public async Task<IActionResult> PutClass([FromBody]ClassViewModel ClassViewModel)
+        {
+            try
+            {
+                var clasS = await _MangoDataContext.Classes.FirstOrDefaultAsync(x => x.Id == ClassViewModel.Id);
+                if(clasS == null) return NotFound();    
+
+                clasS.Year = ClassViewModel.Year;
+                clasS.Month = ClassViewModel.Month;
+                clasS.Name = ClassViewModel.Name;
+
+                _MangoDataContext.Update(clasS);
+                _MangoDataContext.SaveChanges();
+
+                return Ok();
             }
             catch (Exception)
             {

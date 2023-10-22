@@ -26,11 +26,8 @@ namespace MangoSchoolApi.Controllers
                 var classes = await _MangoDataContext.Classes
                     .Skip(10 * page)
                     .Take(10)
-                    .OrderByDescending(x => x.Year)
-                    .Where(x => x.IsActive)
+                    .OrderByDescending(x => x.CreateDate)
                     .ToListAsync();
-
-
 
                 return Ok(classes);
             }
@@ -71,6 +68,7 @@ namespace MangoSchoolApi.Controllers
                     Month = ClassViewModel.Month,
                     Name = ClassViewModel.Name,
                     Year = ClassViewModel.Year,
+                    CreateDate = DateTime.Now
                 };
 
                 _MangoDataContext.Classes.Add(clasS);

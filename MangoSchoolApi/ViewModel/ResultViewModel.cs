@@ -15,5 +15,6 @@
         public int Total { get; set; }
         public int Ave { get; set; }
         public int Pos { get; set; }
+        public int ClassId { get; set; }
     }
 }

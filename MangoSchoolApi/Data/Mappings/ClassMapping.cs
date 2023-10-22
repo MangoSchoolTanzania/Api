@@ -41,6 +41,12 @@ namespace MangoSchoolApi.Data.Mappings
                             .HasColumnName("Year")
                             .HasColumnType("int");
 
+
+            builder.Property(x => x.CreateDate)
+                            .IsRequired()
+                            .HasColumnName("Created")
+                            .HasColumnType("DateTimeOffset");
+
             builder.HasMany(x => x.Results)
                 .WithOne(x => x.Class);
                

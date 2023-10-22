@@ -3,6 +3,7 @@
     public class Result 
     {
         public int Id { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
         public bool IsActive { get; set; }
         public string Name { get; set; }
         public int Arith { get; set; }

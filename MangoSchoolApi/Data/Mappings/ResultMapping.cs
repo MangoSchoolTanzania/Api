@@ -26,7 +26,11 @@ namespace MangoSchoolApi.Data.Mappings
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(200);
 
-            
+            builder.Property(x => x.CreateDate)
+                            .IsRequired()
+                            .HasColumnName("Created")
+                            .HasColumnType("DateTimeOffset");
+
             builder.Property(x => x.Arith)
                 .IsRequired()
                 .HasColumnName("Arith")

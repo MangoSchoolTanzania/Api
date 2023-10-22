@@ -29,8 +29,8 @@ namespace MangoSchoolApi.Controllers
                      var results = await _MangoDataContext.Results
                     .Include(x => x.Class)
                     .Where(x => x.IsActive == true)
-                    .OrderBy(x => x.Class.Year)
-                    .ThenBy(x => x.Class.Name)
+                    .OrderByDescending(x => x.Class.CreateDate)
+                    .ThenByDescending(x => x.Class.Name)
                     .Skip(page * 15)
                     .Take(15)
                     .Select(x => new ResultModelView()
@@ -61,7 +61,7 @@ namespace MangoSchoolApi.Controllers
                     var results = await _MangoDataContext.Results
                     .Include(x => x.Class)
                     .Where(x => x.IsActive == true && x.Class.Name.Contains(stringParam))
-                    .OrderBy(x => x.Class.Year)
+                    .OrderByDescending(x => x.Class.CreateDate)
                     .ThenBy(x => x.Class.Name)
                     .Skip(page * 25)
                     .Take(25)
@@ -92,7 +92,7 @@ namespace MangoSchoolApi.Controllers
                     var results = await _MangoDataContext.Results
                     .Include(x => x.Class)
                     .Where(x => x.IsActive == true && x.Class.Year == int.Parse(stringParam))
-                    .OrderBy(x => x.Class.Year)
+                    .OrderByDescending(x => x.Class.CreateDate)
                     .ThenBy(x => x.Class.Name)
                     .Skip(page * 25)
                     .Take(25)
@@ -123,7 +123,7 @@ namespace MangoSchoolApi.Controllers
                     var results = await _MangoDataContext.Results
                     .Include(x => x.Class)
                     .Where(x => x.IsActive == true && x.Name == stringParam)
-                    .OrderBy(x => x.Class.Year)
+                    .OrderByDescending(x => x.Class.CreateDate)
                     .ThenBy(x => x.Class.Name)
                     .Skip(page * 25)
                     .Take(25)
@@ -167,8 +167,8 @@ namespace MangoSchoolApi.Controllers
                 var results = await _MangoDataContext.Results
                     .Where(x => x.ClassId == classId)
                     .Include(x => x.Class)
-                    .OrderBy(x => x.Class.Year)
-                    .ThenBy(x => x.Class.Name)
+                    .OrderByDescending(x => x.CreateDate)
+                    .ThenByDescending(x => x.Name)
                     .Select(x => new ResultModelView()
                     {
                         Id = x.Id,
@@ -231,6 +231,7 @@ namespace MangoSchoolApi.Controllers
 
                 var ModelClass = new Result()
                 {
+                    CreateDate = DateTime.Now,
                     Arith = ResultViewModel.Arith,
                     HE = ResultViewModel.HE,
                     Ave = ResultViewModel.Ave,
@@ -241,7 +242,8 @@ namespace MangoSchoolApi.Controllers
                     SA = ResultViewModel.SA,
                     Total = ResultViewModel.Total,
                     Writ = ResultViewModel.Writ,
-                    IsActive = true
+                    IsActive = true,
+                    ClassId = ResultViewModel.ClassId,
                 };
 
                 _MangoDataContext.Results.Add(ModelClass);
@@ -294,15 +296,14 @@ namespace MangoSchoolApi.Controllers
         {
             try
             {
-                var ClassFromDatabase = _MangoDataContext.Results.FirstOrDefault(x => x.Id == id);
-                if (ClassFromDatabase == null) { return NotFound(); }
+                var resultFromDatabase = _MangoDataContext.Results.FirstOrDefault(x => x.Id == id);
+                if (resultFromDatabase == null) { return NotFound(); }
 
-                ClassFromDatabase.IsActive = false;
 
-                _MangoDataContext.Update(ClassFromDatabase);
+                _MangoDataContext.Remove(resultFromDatabase);
                 _MangoDataContext.SaveChanges();
 
-                return Ok(ClassFromDatabase);
+                return Ok(resultFromDatabase);
             }
             catch (Exception)
             {

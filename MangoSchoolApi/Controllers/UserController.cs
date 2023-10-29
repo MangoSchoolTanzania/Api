@@ -132,33 +132,33 @@ namespace MangoSchoolApi.Controllers
             }
         }
 
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> PostClass([FromBody] ClassViewModel classViewModel)
-        {
-            try
-            {
-                if (classViewModel == null) return BadRequest();
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<IActionResult> PostClass([FromBody] ClassViewModel classViewModel)
+        //{
+        //    try
+        //    {
+        //        if (classViewModel == null) return BadRequest();
 
-                var newClass = new Class()
-                {
-                    Name = classViewModel.Name,
-                    IsActive = classViewModel.IsActive,
-                    Year = classViewModel.Year,
-                    Month = classViewModel.Month
-                };
+        //        var newClass = new Class()
+        //        {
+        //            Name = classViewModel.Name,
+        //            IsActive = classViewModel.IsActive,
+        //            Year = classViewModel.Year,
+        //            Month = classViewModel.Month
+        //        };
 
-                _MangoDataContext.Add(newClass);
-                await _MangoDataContext.SaveChangesAsync();
+        //        _MangoDataContext.Add(newClass);
+        //        await _MangoDataContext.SaveChangesAsync();
 
-                return Ok(newClass);
-            }
-            catch (Exception)
-            {
-                // Handle exceptions and return an appropriate response
-                return StatusCode(500, "Internal server error");
-            }
-        }
+        //        return Ok(newClass);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // Handle exceptions and return an appropriate response
+        //        return StatusCode(500, "Internal server error");
+        //    }
+        //}
 
         [Authorize]
         [HttpPut("{id}")]
@@ -188,28 +188,28 @@ namespace MangoSchoolApi.Controllers
             }
         }
 
-        [Authorize]
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClass(int id)
-        {
-            try
-            {
-                var classToDelete = await _MangoDataContext.Classes.FirstOrDefaultAsync(x => x.Id == id);
-                if (classToDelete == null) return NotFound();
+        //[Authorize]
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteClass(int id)
+        //{
+        //    try
+        //    {
+        //        var classToDelete = await _MangoDataContext.Classes.FirstOrDefaultAsync(x => x.Id == id);
+        //        if (classToDelete == null) return NotFound();
 
-                classToDelete.IsActive = false;
+        //        classToDelete.IsActive = false;
 
-                _MangoDataContext.Update(classToDelete);
-                await _MangoDataContext.SaveChangesAsync();
+        //        _MangoDataContext.Update(classToDelete);
+        //        await _MangoDataContext.SaveChangesAsync();
 
-                return Ok(classToDelete);
-            }
-            catch (Exception)
-            {
-                // Handle exceptions and return an appropriate response
-                return StatusCode(500, "Internal server error");
-            }
-        }
+        //        return Ok(classToDelete);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // Handle exceptions and return an appropriate response
+        //        return StatusCode(500, "Internal server error");
+        //    }
+        //}
 
     }
 }

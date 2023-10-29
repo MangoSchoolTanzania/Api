@@ -1,4 +1,6 @@
 using MangoSchoolApi.Data;
+using MangoSchoolApi.Repository;
+using MangoSchoolApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +12,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MangoDataContext>();
+//Repositories
+builder.Services.AddScoped<IResultRepository, ResultRepository>();
+//Services
+builder.Services.AddScoped<IResultService, ResultService>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -1,5 +1,5 @@
 ﻿using MangoSchoolApi.Models;
-using MangoSchoolApi.ModelView;
+using MangoSchoolApi.Models.ModelView;
 using MangoSchoolApi.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 

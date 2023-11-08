@@ -1,12 +1,9 @@
-﻿using MangoSchoolApi.Data;
-using MangoSchoolApi.Models;
-using MangoSchoolApi.ModelView;
+﻿using MangoSchoolApi.Models;
 using MangoSchoolApi.Repository;
 using MangoSchoolApi.Services;
 using MangoSchoolApi.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace MangoSchoolApi.Controllers
 {

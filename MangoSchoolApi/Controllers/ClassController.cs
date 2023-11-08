@@ -1,5 +1,6 @@
 ﻿using MangoSchoolApi.Data;
 using MangoSchoolApi.Models;
+using MangoSchoolApi.Repository;
 using MangoSchoolApi.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,10 @@ namespace MangoSchoolApi.Controllers
     [Route("/v1/Class/")]
     public class ClassController : ControllerBase
     {
-        public readonly MangoDataContext _MangoDataContext;
-        public ClassController(MangoDataContext MangoDataContext)
+        public readonly IClassRepository _IClassRepository;
+        public ClassController(IClassRepository IClassRepository)
         {
-            _MangoDataContext = MangoDataContext;
+            _IClassRepository = IClassRepository;
         }
 
         [Authorize, HttpGet("Pag/{page}")]
@@ -23,11 +24,7 @@ namespace MangoSchoolApi.Controllers
         {
             try
             {
-                var classes = await _MangoDataContext.Classes
-                    .Skip(10 * page)
-                    .Take(10)
-                    .OrderByDescending(x => x.CreateDate)
-                    .ToListAsync();
+                var classes = await _IClassRepository.GetClasses(page);
 
                 return Ok(classes);
             }
@@ -43,8 +40,7 @@ namespace MangoSchoolApi.Controllers
         {
             try
             {
-                var clasS = await _MangoDataContext.Classes
-                    .FirstOrDefaultAsync(x => x.Id == id);
+                var clasS = await _IClassRepository.GetClass(id);
 
                 if (clasS == null) return NotFound();
 
@@ -71,10 +67,9 @@ namespace MangoSchoolApi.Controllers
                     CreateDate = DateTime.Now
                 };
 
-                _MangoDataContext.Classes.Add(clasS);
-                _MangoDataContext.SaveChanges();
+                var clasSaved = _IClassRepository.PostClass(clasS);
 
-                return Ok(clasS);
+                return Ok(clasSaved);
             }
             catch (Exception)
             {
@@ -88,11 +83,8 @@ namespace MangoSchoolApi.Controllers
         {
             try
             {
-                var clasS = await _MangoDataContext.Classes.FirstOrDefaultAsync(c => c.Id == id);
+                var clasS = await _IClassRepository.DeleteClass(id);
                 if (clasS == null) return NotFound();
-
-                _MangoDataContext.Remove(clasS);
-                _MangoDataContext.SaveChanges();
 
                 return Ok();
             }
@@ -108,17 +100,9 @@ namespace MangoSchoolApi.Controllers
         {
             try
             {
-                var clasS = await _MangoDataContext.Classes.FirstOrDefaultAsync(x => x.Id == ClassViewModel.Id);
-                if(clasS == null) return NotFound();    
+                var clasS = await _IClassRepository.PutClass(ClassViewModel);
 
-                clasS.Year = ClassViewModel.Year;
-                clasS.Month = ClassViewModel.Month;
-                clasS.Name = ClassViewModel.Name;
-
-                _MangoDataContext.Update(clasS);
-                _MangoDataContext.SaveChanges();
-
-                return Ok();
+                return Ok(clasS);
             }
             catch (Exception)
             {

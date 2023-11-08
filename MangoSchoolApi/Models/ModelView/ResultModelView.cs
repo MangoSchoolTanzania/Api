@@ -1,4 +1,4 @@
-﻿namespace MangoSchoolApi.ModelView
+﻿namespace MangoSchoolApi.Models.ModelView
 {
     public class ResultModelView
     {

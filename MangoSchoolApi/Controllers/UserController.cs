@@ -17,6 +17,7 @@ namespace MangoSchoolApi.Controllers
             _MangoDataContext = MangoDataContext;
         }
 
+        
         [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)

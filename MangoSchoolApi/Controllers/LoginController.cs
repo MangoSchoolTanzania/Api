@@ -1,5 +1,6 @@
 ﻿using MangoSchoolApi.Data;
 using MangoSchoolApi.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -18,6 +19,14 @@ namespace MangoSchoolApi.Controllers
         {
             _configuration = configuration;
         }
+
+        [Authorize]
+        [HttpGet, Route("/v1/Login/VerifyUser")]
+        public async Task<IActionResult> Verify()
+        {
+            return Ok();
+        }
+
 
         [HttpPost]
         [Route("/v1/Login")]

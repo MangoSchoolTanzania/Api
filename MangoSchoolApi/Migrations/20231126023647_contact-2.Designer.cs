@@ -4,6 +4,7 @@ using MangoSchoolApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MangoSchoolApi.Migrations
 {
     [DbContext(typeof(MangoDataContext))]
-    partial class MangoDataContextModelSnapshot : ModelSnapshot
+    [Migration("20231126023647_contact-2")]
+    partial class contact2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,7 +80,7 @@ namespace MangoSchoolApi.Migrations
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        .HasMaxLength(2000)
+                        .HasMaxLength(200)
                         .HasColumnType("NVARCHAR")
                         .HasColumnName("Message");
 

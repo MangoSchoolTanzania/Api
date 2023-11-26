@@ -12,9 +12,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MangoDataContext>();
+
 //Repositories
 builder.Services.AddScoped<IResultRepository, ResultRepository>();
 builder.Services.AddScoped<IClassRepository,ClassRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 //Services
 builder.Services.AddScoped<IResultService, ResultService>();
 builder.Services.AddAuthentication(options =>

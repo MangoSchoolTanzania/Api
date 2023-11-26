@@ -23,6 +23,8 @@ namespace MangoSchoolApi.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Result> Results { get; set; }
         public DbSet<Class> Classes { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -33,6 +35,8 @@ namespace MangoSchoolApi.Data
             modelBuilder.ApplyConfiguration(new UserMapping());
             modelBuilder.ApplyConfiguration(new ResultMapping());
             modelBuilder.ApplyConfiguration(new ClassMapping());
+            modelBuilder.ApplyConfiguration(new ContactMapping());
+
 
         }
     }

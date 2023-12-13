@@ -1,6 +1,6 @@
-﻿namespace MangoSchoolApi.Models
+﻿namespace MangoSchoolApi.Models.ViewModel
 {
-    public class User
+    public class UserViewModel
     {
         public int Id { get; set; }
         public string UserName { get; set; }
@@ -8,6 +8,5 @@
         public string Password { get; set; }
         public bool isAdmin { get; set; }
         public bool isActive { get; set; }
-
     }
 }

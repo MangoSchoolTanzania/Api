@@ -1,6 +1,6 @@
-﻿using MangoSchoolApi.Models;
+﻿using MangoSchoolApi.Models.Models;
 using MangoSchoolApi.Models.ModelView;
-using MangoSchoolApi.ViewModel;
+using MangoSchoolApi.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MangoSchoolApi.Repository

@@ -1,4 +1,4 @@
-﻿namespace MangoSchoolApi.Models
+﻿namespace MangoSchoolApi.Models.Models
 {
     public class Config
     {

@@ -1,12 +1,12 @@
-﻿using MangoSchoolApi.Repository;
-using MangoSchoolApi.ViewModel;
+﻿using MangoSchoolApi.Models.ViewModel;
+using MangoSchoolApi.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 
 namespace MangoSchoolApi.Controllers
 {
-    [ApiController,Route("Contact")]
+    [ApiController,Route("v1/Contact/")]
     public class ContactController : ControllerBase
     {
         public readonly IContactRepository _IContactRepository;
@@ -18,30 +18,31 @@ namespace MangoSchoolApi.Controllers
         [HttpGet,Authorize,Route("{id}")]
         public async Task<IActionResult> GetContact(int id)
         {
-            return Ok(_IContactRepository.GetContact(id));
+            return Ok(await _IContactRepository.GetContact(id));
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize,Route("GetAll")]
         public async Task<IActionResult> GetContacts()
         {
-            return Ok(_IContactRepository.GetContacts());
+            return Ok(await _IContactRepository.GetContacts());
         }
 
         [HttpPost]
         public async Task<IActionResult> PostContact([FromBody]ContactViewModel ContactVM)
         {
-            return Ok(_IContactRepository.PostContact(ContactVM));
+            return Ok(await _IContactRepository.PostContact(ContactVM));
         }
 
         [HttpPut,Authorize]
         public async Task<IActionResult> PutContact([FromBody] ContactViewModel ContactVM)
         {
-            return Ok(_IContactRepository.PutContact(ContactVM));
+            return Ok(await _IContactRepository.PutContact(ContactVM));
         }
 
-        public async Task<IActionResult> DeleteContact([FromBody] ContactViewModel ContactVM)
+        [HttpDelete,Authorize,Route("Delete/{id}")]
+        public async Task<IActionResult> DeleteContact([FromRoute]int id)
         {
-            return Ok(_IContactRepository.DeleteContact(ContactVM));
+            return Ok(await _IContactRepository.DeleteContact(id));
         }
     }
 }

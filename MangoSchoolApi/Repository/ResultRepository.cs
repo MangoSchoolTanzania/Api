@@ -1,7 +1,7 @@
 ﻿using MangoSchoolApi.Data;
-using MangoSchoolApi.Models;
+using MangoSchoolApi.Models.Models;
 using MangoSchoolApi.Models.ModelView;
-using MangoSchoolApi.ViewModel;
+using MangoSchoolApi.Models.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace MangoSchoolApi.Repository

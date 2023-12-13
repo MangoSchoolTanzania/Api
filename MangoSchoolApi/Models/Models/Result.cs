@@ -1,6 +1,6 @@
-﻿namespace MangoSchoolApi.Models
+﻿namespace MangoSchoolApi.Models.Models
 {
-    public class Result 
+    public class Result
     {
         public int Id { get; set; }
         public DateTimeOffset CreateDate { get; set; }

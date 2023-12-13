@@ -1,6 +1,6 @@
 ﻿using MangoSchoolApi.Data;
-using MangoSchoolApi.Models;
-using MangoSchoolApi.ViewModel;
+using MangoSchoolApi.Models.Models;
+using MangoSchoolApi.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +21,7 @@ namespace MangoSchoolApi.Repository
             {
                 var users = await _MangoDataContext
                     .Users
+                    .Where(x => x.isActive == true)
                     .OrderBy(x => x.UserName)
                     .ToListAsync()
                     ;
@@ -52,10 +53,10 @@ namespace MangoSchoolApi.Repository
         {
             try
             {
-                var user = GetUser(id);
+                var user = await GetUser(id);
                 _MangoDataContext.Remove(user);
                 _MangoDataContext.SaveChanges();
-                return await user;
+                return user;
             }
             catch (Exception)
             {

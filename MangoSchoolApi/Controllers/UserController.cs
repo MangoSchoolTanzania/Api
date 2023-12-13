@@ -1,7 +1,9 @@
 ﻿using MangoSchoolApi.Data;
 using MangoSchoolApi.Models;
+using MangoSchoolApi.Models.Models;
+using MangoSchoolApi.Models.ViewModel;
 using MangoSchoolApi.Repository;
-using MangoSchoolApi.ViewModel;
+using MangoSchoolApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +11,16 @@ using Microsoft.EntityFrameworkCore;
 namespace MangoSchoolApi.Controllers
 {
     [ApiController]
-    [Route("v1/User")]
+    [Route("v1/User/")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _IUserRepository;
-        public UserController(IUserRepository UserRepository)
+        private readonly IUserService _IUserService;
+
+        public UserController(IUserRepository UserRepository, IUserService IUserService)
         {
             _IUserRepository = UserRepository;
+            _IUserService = IUserService;
         }
         
         [Authorize]
@@ -103,6 +108,20 @@ namespace MangoSchoolApi.Controllers
                 var user = await _IUserRepository.DeleteUser(id);
 
                 return Ok(user);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [Authorize, HttpPost,Route("Invite")]
+        public async Task<IActionResult> InviteNewUser([FromBody]InviteViewModel Invite)
+        {
+            try
+            {
+               return Ok(await _IUserService.processInvite(Invite.Email)); 
             }
             catch (Exception)
             {

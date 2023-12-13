@@ -1,5 +1,5 @@
 ﻿using MangoSchoolApi.Data.Mappings;
-using MangoSchoolApi.Models;
+using MangoSchoolApi.Models.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MangoSchoolApi.Data

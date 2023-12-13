@@ -1,6 +1,6 @@
 ﻿using MangoSchoolApi.Data;
-using MangoSchoolApi.Models;
-using MangoSchoolApi.ViewModel;
+using MangoSchoolApi.Models.Models;
+using MangoSchoolApi.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

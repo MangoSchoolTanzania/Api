@@ -1,4 +1,4 @@
-﻿using MangoSchoolApi.Models;
+﻿using MangoSchoolApi.Models.Models;
 
 namespace MangoSchoolApi.Services
 {

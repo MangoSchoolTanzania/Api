@@ -1,4 +1,4 @@
-﻿using MangoSchoolApi.Models;
+﻿using MangoSchoolApi.Models.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -47,6 +47,16 @@ namespace MangoSchoolApi.Data.Mappings
                 .IsRequired()
                 .HasColumnName("IsActive")
                 .HasColumnType("SMALLINT");
+
+            builder.Property(x => x.isActive)
+                .IsRequired()
+                .HasColumnName("IsActive")
+                .HasColumnType("SMALLINT");
+
+            builder.Property(x => x.InviteGuid)
+                .IsRequired()
+                .HasColumnName("InviteGuid")
+                .HasColumnType("Varchar");
         }
     }
 }

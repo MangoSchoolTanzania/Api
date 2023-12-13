@@ -1,7 +1,8 @@
 ﻿using MangoSchoolApi.Data;
 using MangoSchoolApi.Models;
+using MangoSchoolApi.Models.Models;
+using MangoSchoolApi.Models.ViewModel;
 using MangoSchoolApi.Repository;
-using MangoSchoolApi.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

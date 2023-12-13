@@ -1,5 +1,5 @@
-﻿using MangoSchoolApi.Models;
-using MangoSchoolApi.ViewModel;
+﻿using MangoSchoolApi.Models.Models;
+using MangoSchoolApi.Models.ViewModel;
 
 namespace MangoSchoolApi.Repository
 {

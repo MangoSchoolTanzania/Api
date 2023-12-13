@@ -1,4 +1,4 @@
-﻿using MangoSchoolApi.Models;
+﻿using MangoSchoolApi.Models.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

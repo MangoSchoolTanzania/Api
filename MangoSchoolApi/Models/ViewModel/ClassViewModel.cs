@@ -1,6 +1,6 @@
 ﻿using MangoSchoolApi.Models;
 
-namespace MangoSchoolApi.ViewModel
+namespace MangoSchoolApi.Models.ViewModel
 {
     public class ClassViewModel
     {

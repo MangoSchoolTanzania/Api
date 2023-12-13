@@ -1,5 +1,5 @@
-﻿using MangoSchoolApi.Models;
-using MangoSchoolApi.ViewModel;
+﻿using MangoSchoolApi.Models.Models;
+using MangoSchoolApi.Models.ViewModel;
 
 namespace MangoSchoolApi.Repository
 {
@@ -9,6 +9,6 @@ namespace MangoSchoolApi.Repository
         public Task<List<Contact>> GetContacts();
         public Task<Contact> PostContact(ContactViewModel contactVM);
         public Task<Contact> PutContact(ContactViewModel contactVM);
-        public Task<Contact> DeleteContact(ContactViewModel contactVM);
+        public Task<Contact> DeleteContact(int id);
     }
 }

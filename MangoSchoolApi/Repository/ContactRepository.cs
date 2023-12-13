@@ -1,6 +1,6 @@
 ﻿using MangoSchoolApi.Data;
-using MangoSchoolApi.Models;
-using MangoSchoolApi.ViewModel;
+using MangoSchoolApi.Models.Models;
+using MangoSchoolApi.Models.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace MangoSchoolApi.Repository
@@ -18,7 +18,7 @@ namespace MangoSchoolApi.Repository
         {
             try
             {
-                var result = await _MangoDataContext.Results
+                var result = await _MangoDataContext.Contacts
                     .FirstOrDefaultAsync(x => x.Id == id);
 
                 return (Contact)result;
@@ -90,11 +90,11 @@ namespace MangoSchoolApi.Repository
             }
         }
 
-        public async Task<Contact> DeleteContact(ContactViewModel contactVM)
+        public async Task<Contact> DeleteContact(int id)
         {
             try
             {
-                var contact = await GetContact(contactVM.Id);
+                var contact = await GetContact(id);
                 _MangoDataContext.Remove(contact);
                 _MangoDataContext.SaveChanges();
 

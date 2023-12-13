@@ -8,6 +8,7 @@ C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\M
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Azure.Core.dll
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Azure.Identity.dll
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Humanizer.dll
+C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
@@ -37,6 +38,9 @@ C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\M
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\SendGrid.dll
+C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\StarkbankEcdsa.dll
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -85,4 +89,3 @@ C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\obj\Debug\net6.0\r
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\obj\Debug\net6.0\MangoSchoolApi.pdb
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\obj\Debug\net6.0\MangoSchoolApi.genruntimeconfig.cache
 C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\obj\Debug\net6.0\ref\MangoSchoolApi.dll
-C:\PersonalProjects\MangoSchool\MangoSchoolApi\MangoSchoolApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

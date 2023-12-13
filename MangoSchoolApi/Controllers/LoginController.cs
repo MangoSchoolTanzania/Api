@@ -1,5 +1,5 @@
 ﻿using MangoSchoolApi.Data;
-using MangoSchoolApi.ViewModel;
+using MangoSchoolApi.Models.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -55,10 +55,17 @@ namespace MangoSchoolApi.Controllers
 
         private async Task<bool> IsValidUser(MangoDataContext Context, string email, string password)
         {
-            var user = await Context.Users.FirstOrDefaultAsync(x => x.UserEmail == email && x.Password == password);
-            if (user != null) { return true; }
+            try
+            {
+                var user = await Context.Users.FirstOrDefaultAsync(x => x.UserEmail == email && x.Password == password);
+                if (user != null) return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
 
-            return false;
         }
 
         private string GenerateJwtToken(string username)
